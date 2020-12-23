@@ -21,7 +21,6 @@ app.use(bodyParser.json({ type : '*/*'}));
 router(app);
 app.use(express.static(path.join(__dirname,'client','build')))
 app.get('*',(req,res) => {
-    console.log("YES");
     res.sendFile(path.join(__dirname,'client','build','index.html'))
 })
 
