@@ -18,14 +18,11 @@ mongoose.connect(uri, {useUnifiedTopology : true, useNewUrlParser: true})
 app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json({ type : '*/*'}));
+app.use(express.static(path.join(__dirname + 'client/build')));
 router(app);
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-  
-    app.get('*', (request, response) => {
-      response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-}
+app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname + 'client/build/index.html'));
+});
 // app.use(express.static(path.join(__dirname,'client','build')))
 // app.get('*',(req,res) => {
 //     res.sendFile(path.join(__dirname,'client','build','index.html'))
