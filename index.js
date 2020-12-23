@@ -18,14 +18,15 @@ mongoose.connect(uri, {useUnifiedTopology : true, useNewUrlParser: true})
 app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json({ type : '*/*'}));
+router(app);
 app.use(express.static(path.join(__dirname,'client/build')))
 app.get('*',(req,res) => {
+    console.log("YES");
     res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
-router(app);
 
 // Server setup
-const port = process.env.port || 3090;
-const server = http.createServer(app);
-server.listen(port);
-console.log('Server listening on port ' + port);
+const port = process.env.PORT || 3090;
+app.listen(port,() => {
+    console.log('Server listening on port ' + port);
+})

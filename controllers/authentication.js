@@ -8,6 +8,7 @@ function tokenForUser(user){
 }
 
 exports.signup = function(req,res,next) {
+    console.log(req);
     const username = req.body.username;
     const password = req.body.password;
 
